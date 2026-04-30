@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jàngu Bi — Choix de version</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#0D1520;color:white;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.5rem;-webkit-font-smoothing:antialiased;}
+.header{text-align:center;margin-bottom:3.5rem;}
+.tag{font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#70CBFF;margin-bottom:.875rem;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.25rem);font-weight:700;line-height:1.1;letter-spacing:-.025em;margin-bottom:.875rem;}
+.sub{font-size:1.0625rem;color:rgba(255,255,255,.5);line-height:1.65;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;width:100%;}
+.card{border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.1);transition:transform .3s cubic-bezier(.34,1.56,.64,1),border-color .25s,box-shadow .25s;cursor:pointer;text-decoration:none;display:block;}
+.card:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.25);box-shadow:0 24px 60px rgba(0,0,0,.4);}
+.card-preview{height:220px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+
+/* V1 preview */
+.preview-v1{background:linear-gradient(145deg,#0B1929,#1A3A5C,#1F6FA6);}
+.preview-v1 .mock{width:80px;height:140px;background:#0A1520;border-radius:16px;border:3px solid rgba(255,255,255,.15);animation:float 6s ease-in-out infinite;box-shadow:0 16px 40px rgba(112,203,255,.25);}
+.preview-v1 .mock::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(112,203,255,.08),transparent);}
+
+/* V2 preview */
+.preview-v2{background:linear-gradient(145deg,#07101A,#0D1C2B);}
+.preview-v2 .mock-row{display:flex;gap:.75rem;align-items:flex-end;}
+.preview-v2 .mock-sm{width:60px;height:110px;background:#080E18;border-radius:12px;border:2px solid rgba(200,146,42,.2);animation:float-l 7s ease-in-out infinite;}
+.preview-v2 .mock-c{width:72px;height:140px;background:#080E18;border-radius:14px;border:2px solid rgba(200,146,42,.3);animation:float 6s ease-in-out infinite;box-shadow:0 0 30px rgba(200,146,42,.2);}
+.preview-v2 .mock-sr{width:60px;height:110px;background:#080E18;border-radius:12px;border:2px solid rgba(200,146,42,.2);animation:float-r 5.5s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes float-l{0%,100%{transform:translateY(-5px)}50%{transform:translateY(5px)}}
+@keyframes float-r{0%,100%{transform:translateY(3px)}50%{transform:translateY(-8px)}}
+
+/* V3 preview */
+.preview-v3{background:var(--ink,#1A1108);background:linear-gradient(145deg,#1A1108,#2A1A08);}
+.preview-v3 .ring{position:absolute;border-radius:50%;border:1px solid rgba(200,82,26,.25);}
+.preview-v3 .r1{width:160px;height:160px;animation:ring-p 4s ease-in-out infinite;}
+.preview-v3 .r2{width:120px;height:120px;animation:ring-p 4s ease-in-out infinite .6s;}
+.preview-v3 .mock{width:76px;height:138px;background:#120D08;border-radius:16px;border:3px solid rgba(200,82,26,.3);z-index:1;animation:float 6s ease-in-out infinite;box-shadow:0 16px 40px rgba(200,82,26,.2);}
+@keyframes ring-p{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+.card-info{padding:1.5rem;}
+.card-version{font-size:.625rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem;}
+.v1-c{color:#70CBFF;} .v2-c{color:#E8B84B;} .v3-c{color:#E87845;}
+.card-name{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:white;margin-bottom:.5rem;letter-spacing:-.01em;}
+.card-desc{font-size:.875rem;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:1.25rem;}
+.card-palette{display:flex;gap:.375rem;margin-bottom:1.25rem;}
+.swatch{width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,.08);}
+.card-cta{display:inline-flex;align-items:center;gap:.375rem;font-size:.875rem;font-weight:600;color:white;border:1.5px solid rgba(255,255,255,.2);border-radius:9999px;padding:.4375rem 1rem;transition:background .2s,border-color .2s;}
+.card:hover .card-cta{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4);}
+
+.footer-note{margin-top:2.5rem;font-size:.8125rem;color:rgba(255,255,255,.3);text-align:center;line-height:1.65;}
+
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">Jàngu Bi · Landing Page</div>
+  <h1>Choisissez votre direction</h1>
+  <p class="sub">3 versions distinctes — palettes, typographie et ambiance différentes.</p>
+</div>
+
+<div class="grid">
+  <!-- V1 -->
+  <a href="v1-lumiere.html" class="card">
+    <div class="card-preview preview-v1">
+      <div class="mock"></div>
+    </div>
+    <div class="card-info">
+      <div class="card-version v1-c">Version 01</div>
+      <div class="card-name">Lumière</div>
+      <div class="card-desc">Blanc &amp; Bleu ciel. Éditorial, épuré, généreux en espace. Proche des standards SaaS premium.</div>
+      <div class="card-palette">
+        <div class="swatch" style="background:#0F1923"></div>
+        <div class="swatch" style="background:#1A8FCC"></div>
+        <div class="swatch" style="background:#70CBFF"></div>
+        <div class="swatch" style="background:#EBF7FF"></div>
+        <div class="swatch" style="background:#FFFFFF"></div>
+      </div>
+      <span class="card-cta">Voir la version →</span>
+    </div>
+  </a>
+
+  <!-- V2 -->
+  <a href="v2-nuit-sacree.html" class="card">
+    <div class="card-preview preview-v2">
+      <div class="mock-row">
+        <div class="mock-sm"></div>
+        <div class="mock-c"></div>
+        <div class="mock-sr"></div>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="card-version v2-c">Version 02</div>
+      <div class="card-name">Nuit Sacrée</div>
+      <div class="card-desc">Dark mode avec or liturgique. Premium, spirituel, intense. 3 phones flottants en hero.</div>
+      <div class="card-palette">
+        <div class="swatch" style="background:#07101A"></div>
+        <div class="swatch" style="background:#0D1C2B"></div>
+        <div class="swatch" style="background:#C8922A"></div>
+        <div class="swatch" style="background:#E8B84B"></div>
+        <div class="swatch" style="background:#70CBFF"></div>
+      </div>
+      <span class="card-cta">Voir la version →</span>
+    </div>
+  </a>
+
+  <!-- V3 -->
+  <a href="v3-soleil-levant.html" class="card">
+    <div class="card-preview preview-v3">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="mock"></div>
+    </div>
+    <div class="card-info">
+      <div class="card-version v3-c">Version 03</div>
+      <div class="card-name">Soleil Levant</div>
+      <div class="card-desc">Crème &amp; Terracotta. Chaud, ancré, typographique. Bande stats pleine largeur terracotta.</div>
+      <div class="card-palette">
+        <div class="swatch" style="background:#1A1108"></div>
+        <div class="swatch" style="background:#C8521A"></div>
+        <div class="swatch" style="background:#E87845"></div>
+        <div class="swatch" style="background:#F5EFE6"></div>
+        <div class="swatch" style="background:#FBF7F2"></div>
+      </div>
+      <span class="card-cta">Voir la version →</span>
+    </div>
+  </a>
+</div>
+
+<p class="footer-note">Icônes Lucide · Fonts Playfair Display + Inter · Boutons App Store &amp; Google Play dans chaque version</p>
+
+</body>
+</html>
