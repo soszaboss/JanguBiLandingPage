@@ -29,6 +29,105 @@
   --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;--r-pill:9999px;
   --glow-blue: 0 0 48px rgba(112,203,255,.25);
 }
+
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  --bg:       #EBF5FF;
+  --bg2:      #DAEEFF;
+  --bg3:      #C8E4F8;
+  --border:   rgba(26,143,204,.15);
+  --blue:     #1A8FCC;
+  --blue-mid: #3AADEC;
+  --blue-deep:#0D6FA0;
+  --blue-dim: rgba(26,143,204,.1);
+  --blue-dim2:rgba(26,143,204,.18);
+  --gold:     #C8922A;
+  --gold-lt:  #A06010;
+  --white:    #FFFFFF;
+  --w80: rgba(8,28,50,.85);
+  --w60: rgba(8,28,50,.62);
+  --w40: rgba(8,28,50,.44);
+  --w20: rgba(8,28,50,.18);
+  --glow-blue: 0 0 40px rgba(26,143,204,.2);
+}
+/* Light overrides for hard-coded dark colours */
+[data-theme="light"] body { color: rgba(8,28,50,.85); }
+/* Navbar: keep light text when transparent over dark hero, switch to dark on scroll */
+[data-theme="light"] .logo { color: var(--white); }
+[data-theme="light"] nav.up .logo { color: #081C32; }
+[data-theme="light"] nav.up { background: rgba(235,245,255,.95); box-shadow: 0 1px 0 rgba(26,143,204,.15); }
+[data-theme="light"] .nav-menu a { color: rgba(255,255,255,.7); }
+[data-theme="light"] .nav-menu a:hover { color: var(--white); }
+[data-theme="light"] nav.up .nav-menu a { color: rgba(8,28,50,.5); }
+[data-theme="light"] nav.up .nav-menu a:hover { color: #081C32; }
+[data-theme="light"] .ham span { background: rgba(255,255,255,.7); }
+[data-theme="light"] nav.up .ham span { background: rgba(8,28,50,.6); }
+[data-theme="light"] .drawer-bg { background: rgba(235,245,255,.97); }
+[data-theme="light"] .drawer-inner a { color: rgba(8,28,50,.65); border-color: rgba(26,143,204,.15); }
+/* Hero text stays white in light mode because hero bg is still dark */
+[data-theme="light"] h1.hero-title { color: var(--white); }
+[data-theme="light"] .hero-sub { color: rgba(255,255,255,.7); }
+[data-theme="light"] .hero-eyebrow { color: #70CBFF; border-color: rgba(112,203,255,.3); background: rgba(112,203,255,.12); }
+[data-theme="light"] .hero-proof .proof-text { color: rgba(255,255,255,.5); }
+[data-theme="light"] .hero-proof .proof-text strong { color: rgba(255,255,255,.85); }
+[data-theme="light"] .stars-gold { color: #E8B84B; }
+/* Non-hero headings and text */
+[data-theme="light"] h2.section-h,
+[data-theme="light"] .feat-h, [data-theme="light"] .pq-h,
+[data-theme="light"] .news-title-t, [data-theme="light"] .news-list-hd,
+[data-theme="light"] .docs-hd, [data-theme="light"] .doc-type,
+[data-theme="light"] .chat-nm, [data-theme="light"] .testi-name,
+[data-theme="light"] .foot-logo, [data-theme="light"] .stat-n { color: #081C32; }
+[data-theme="light"] .testi-text { color: rgba(8,28,50,.82); }
+[data-theme="light"] .testi-quote { color: rgba(26,143,204,.35); }
+[data-theme="light"] .testi-card { background: #FFFFFF; border-color: rgba(26,143,204,.15); }
+[data-theme="light"] .testi-av { background: rgba(26,143,204,.1); border-color: rgba(26,143,204,.3); }
+[data-theme="light"] .feat-card { background: #FFFFFF; }
+[data-theme="light"] .feat-card:hover { background: #F0F9FF; }
+[data-theme="light"] .feat-grid { background: rgba(26,143,204,.15); }
+[data-theme="light"] .pq-card { background: #FFFFFF; }
+[data-theme="light"] .news-list, [data-theme="light"] .chat-ui,
+[data-theme="light"] .docs-ui { background: #FFFFFF; }
+[data-theme="light"] .chat-hd { background: #EBF5FF; }
+[data-theme="light"] .chat-hd-sm { background: #DFF0FF; }
+[data-theme="light"] .phone-screen.chat { background: #F4FAFF; }
+[data-theme="light"] .phone-screen.liturgy { background: linear-gradient(180deg,#DFF0FF 0%,#EBF5FF 100%); }
+[data-theme="light"] .lit-label { color: #081C32; }
+[data-theme="light"] .lit-row { background: rgba(255,255,255,.8); border-color: rgba(26,143,204,.12); }
+[data-theme="light"] .bub-d-r { background: #EBF5FF; color: rgba(8,28,50,.85); }
+[data-theme="light"] .bub-sm-r { background: rgba(26,143,204,.1); color: rgba(8,28,50,.85); }
+[data-theme="light"] .ps-tile { background: rgba(255,255,255,.8); border-color: rgba(26,143,204,.12); }
+[data-theme="light"] .ps-tile-label { color: rgba(8,28,50,.65); }
+[data-theme="light"] .ps-news-row { background: rgba(26,143,204,.06); }
+[data-theme="light"] .phone { background: #DFF0FF; border-color: rgba(26,143,204,.2); }
+[data-theme="light"] .phone-bar { background: #DFF0FF; }
+[data-theme="light"] .phone-screen { background: #DFF0FF; }
+[data-theme="light"] #stats { border-color: rgba(26,143,204,.15); }
+[data-theme="light"] #pour-qui { background: #E0EFFF; }
+[data-theme="light"] #cta { background: #DFF0FF; }
+[data-theme="light"] .cta-h, [data-theme="light"] .cta-h em + * { color: #081C32; }
+[data-theme="light"] footer { background: #0D1C2B; border-color: rgba(112,203,255,.1); color: rgba(255,255,255,.8); }
+[data-theme="light"] footer .foot-logo { color: var(--white); }
+[data-theme="light"] footer .foot-tagline { color: rgba(255,255,255,.4); }
+[data-theme="light"] footer .foot-col-h { color: rgba(255,255,255,.2); }
+[data-theme="light"] footer .foot-links a { color: rgba(255,255,255,.4); }
+[data-theme="light"] footer .foot-links a:hover { color: var(--blue); }
+[data-theme="light"] footer .foot-div { border-color: rgba(255,255,255,.08); }
+[data-theme="light"] footer .foot-copy { color: rgba(255,255,255,.2); }
+[data-theme="light"] #hero { background: linear-gradient(145deg,#0B2545 0%,#1A5480 55%,#3AADEC 100%); }
+
+/* Theme toggle button */
+.theme-btn {
+  display:flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:50%;
+  background:var(--blue-dim); border:1px solid rgba(112,203,255,.25);
+  color:var(--blue); cursor:pointer; transition:background .2s, transform .2s;
+  flex-shrink:0;
+}
+.theme-btn:hover { background:var(--blue-dim2); transform:scale(1.08); }
+.theme-btn i { width:16px; height:16px; pointer-events:none; }
+[data-theme="light"] .theme-btn { background:rgba(255,255,255,.2); border-color:rgba(255,255,255,.35); color:var(--white); }
+[data-theme="light"] nav.up .theme-btn { background:rgba(26,143,204,.1); border-color:rgba(26,143,204,.25); color:#1A8FCC; }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--w80);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;}
@@ -313,6 +412,7 @@ footer{background:var(--bg);padding:4rem 0 2rem;border-top:1px solid var(--borde
         <li><a href="#testimonials">Témoignages</a></li>
       </ul>
       <a href="#cta" class="nav-dl"><i data-lucide="download"></i> Télécharger</a>
+      <button class="theme-btn" id="theme-btn" aria-label="Changer le thème"><i data-lucide="moon"></i></button>
       <button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -618,53 +718,116 @@ footer{background:var(--bg);padding:4rem 0 2rem;border-top:1px solid var(--borde
 </footer>
 
 <script>
-lucide.createIcons();
+// ── CRITICAL: Reveal animations must run first, independently ──
+(function() {
+  const revealEls = document.querySelectorAll('.r');
 
-// Étoiles
-const sf=document.getElementById('stars');
-for(let i=0;i<80;i++){
-  const s=document.createElement('div');s.className='star';
-  const sz=Math.random()*2+.5;
-  s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;`;
+  function revealVisible() {
+    revealEls.forEach(el => {
+      if (el.classList.contains('in')) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
+        el.classList.add('in');
+      }
+    });
+  }
+
+  const obs = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+  }), { threshold: 0, rootMargin: '50px 0px -20px 0px' });
+  revealEls.forEach(el => obs.observe(el));
+
+  // Multiple fallbacks to ensure above-the-fold content always appears
+  revealVisible();
+  setTimeout(revealVisible, 50);
+  setTimeout(revealVisible, 200);
+  window.addEventListener('load', revealVisible);
+  window.addEventListener('scroll', revealVisible, { passive: true });
+})();
+
+// ── Navbar scroll ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('up', scrollY > 50), { passive: true });
+
+// ── Hamburger / drawer ──
+const ham = document.getElementById('ham');
+const drawer = document.getElementById('drawer');
+const drawerBg = document.getElementById('drawer-bg');
+function toggleDrawer(open) {
+  ham.classList.toggle('open', open);
+  drawer.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+ham.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
+drawerBg.addEventListener('click', () => toggleDrawer(false));
+drawer.querySelectorAll('.dl').forEach(a => a.addEventListener('click', () => toggleDrawer(false)));
+
+// ── Étoiles ──
+const sf = document.getElementById('stars');
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement('div'); s.className = 'star';
+  const sz = Math.random() * 2 + .5;
+  s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;`;
   sf.appendChild(s);
 }
 
-// Navbar scroll
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('up',scrollY>50),{passive:true});
+// ── Theme toggle ──
+const root = document.documentElement;
+const themeBtn = document.getElementById('theme-btn');
+const savedTheme = localStorage.getItem('jb-theme') || 'dark';
+root.setAttribute('data-theme', savedTheme);
 
-// Hamburger / drawer
-const ham=document.getElementById('ham');
-const drawer=document.getElementById('drawer');
-const drawerBg=document.getElementById('drawer-bg');
-function toggleDrawer(open){
-  ham.classList.toggle('open',open);
-  drawer.classList.toggle('open',open);
-  document.body.style.overflow=open?'hidden':'';
+function syncThemeIcon() {
+  try {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    const iconName = isDark ? 'moon' : 'sun';
+    // Lucide replaces <i> with <svg>, so we need to handle both cases
+    const existing = themeBtn.querySelector('[data-lucide]');
+    if (existing) {
+      existing.setAttribute('data-lucide', iconName);
+    } else {
+      // Re-create the icon element if it was replaced
+      themeBtn.innerHTML = `<i data-lucide="${iconName}"></i>`;
+    }
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  } catch(e) { console.warn('Theme icon sync error:', e); }
 }
-ham.addEventListener('click',()=>toggleDrawer(!drawer.classList.contains('open')));
-drawerBg.addEventListener('click',()=>toggleDrawer(false));
-drawer.querySelectorAll('.dl').forEach(a=>a.addEventListener('click',()=>toggleDrawer(false)));
+themeBtn.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('jb-theme', next);
+  syncThemeIcon();
+});
 
-// Reveal
-const obs=new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}
-}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+// ── Lucide icons (wrapped to prevent crash) ──
+try {
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+    syncThemeIcon();
+  } else {
+    // Lucide CDN not loaded yet — retry on load
+    window.addEventListener('load', () => {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+        syncThemeIcon();
+      }
+    });
+  }
+} catch(e) { console.warn('Lucide init error:', e); }
 
-// Count-up
-const cObs=new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(!e.isIntersecting)return;
-  const el=e.target,target=parseFloat(el.dataset.target),suffix=el.dataset.suffix||'',dur=1500,start=Date.now();
-  const step=()=>{
-    const p=Math.min((Date.now()-start)/dur,1),ease=1-Math.pow(1-p,3),val=Math.floor(ease*target);
-    el.textContent=val>=1000?(val/1000).toFixed(1)+'k+':val;
-    if(p<1)requestAnimationFrame(step);
-    else el.textContent=target>=1000?(target/1000).toFixed(1)+'k+':target+suffix;
+// ── Count-up ──
+const cObs = new IntersectionObserver(entries => entries.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target, target = parseFloat(el.dataset.target), suffix = el.dataset.suffix || '', dur = 1500, start = Date.now();
+  const step = () => {
+    const p = Math.min((Date.now() - start) / dur, 1), ease = 1 - Math.pow(1 - p, 3), val = Math.floor(ease * target);
+    el.textContent = val >= 1000 ? (val / 1000).toFixed(1) + 'k+' : val;
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = target >= 1000 ? (target / 1000).toFixed(1) + 'k+' : target + suffix;
   };
-  requestAnimationFrame(step);cObs.unobserve(el);
-}),{threshold:.5});
-document.querySelectorAll('.stat-n[data-target]').forEach(el=>cObs.observe(el));
+  requestAnimationFrame(step); cObs.unobserve(el);
+}), { threshold: .5 });
+document.querySelectorAll('.stat-n[data-target]').forEach(el => cObs.observe(el));
 </script>
 </body>
 </html>
