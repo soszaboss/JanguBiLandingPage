@@ -3,138 +3,831 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jàngu Bi — Choix de version</title>
+<title>Jàngu Bi — L'application catholique du Sénégal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.427.0/dist/umd/lucide.min.js"></script>
 <style>
+:root {
+  --bg:      #07101A;
+  --bg2:     #0D1C2B;
+  --bg3:     #122236;
+  --border:  rgba(255,255,255,.08);
+  --blue:    #70CBFF;
+  --blue-mid:#3AADEC;
+  --blue-deep:#1A8FCC;
+  --blue-dim: rgba(112,203,255,.12);
+  --blue-dim2:rgba(112,203,255,.2);
+  --gold:    #C8922A;
+  --gold-lt: #E8B84B;
+  --white:   #FFFFFF;
+  --w80: rgba(255,255,255,.8);
+  --w60: rgba(255,255,255,.6);
+  --w40: rgba(255,255,255,.4);
+  --w20: rgba(255,255,255,.2);
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;--r-pill:9999px;
+  --glow-blue: 0 0 48px rgba(112,203,255,.25);
+}
+
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  --bg:       #EBF5FF;
+  --bg2:      #DAEEFF;
+  --bg3:      #C8E4F8;
+  --border:   rgba(26,143,204,.15);
+  --blue:     #1A8FCC;
+  --blue-mid: #3AADEC;
+  --blue-deep:#0D6FA0;
+  --blue-dim: rgba(26,143,204,.1);
+  --blue-dim2:rgba(26,143,204,.18);
+  --gold:     #C8922A;
+  --gold-lt:  #A06010;
+  --white:    #FFFFFF;
+  --w80: rgba(8,28,50,.85);
+  --w60: rgba(8,28,50,.62);
+  --w40: rgba(8,28,50,.44);
+  --w20: rgba(8,28,50,.18);
+  --glow-blue: 0 0 40px rgba(26,143,204,.2);
+}
+/* Light overrides for hard-coded dark colours */
+[data-theme="light"] body { color: rgba(8,28,50,.85); }
+/* Navbar: keep light text when transparent over dark hero, switch to dark on scroll */
+[data-theme="light"] .logo { color: var(--white); }
+[data-theme="light"] nav.up .logo { color: #081C32; }
+[data-theme="light"] nav.up { background: rgba(235,245,255,.95); box-shadow: 0 1px 0 rgba(26,143,204,.15); }
+[data-theme="light"] .nav-menu a { color: rgba(255,255,255,.7); }
+[data-theme="light"] .nav-menu a:hover { color: var(--white); }
+[data-theme="light"] nav.up .nav-menu a { color: rgba(8,28,50,.5); }
+[data-theme="light"] nav.up .nav-menu a:hover { color: #081C32; }
+[data-theme="light"] .ham span { background: rgba(255,255,255,.7); }
+[data-theme="light"] nav.up .ham span { background: rgba(8,28,50,.6); }
+[data-theme="light"] .drawer-bg { background: rgba(235,245,255,.97); }
+[data-theme="light"] .drawer-inner a { color: rgba(8,28,50,.65); border-color: rgba(26,143,204,.15); }
+/* Hero text stays white in light mode because hero bg is still dark */
+[data-theme="light"] h1.hero-title { color: var(--white); }
+[data-theme="light"] .hero-sub { color: rgba(255,255,255,.7); }
+[data-theme="light"] .hero-eyebrow { color: #70CBFF; border-color: rgba(112,203,255,.3); background: rgba(112,203,255,.12); }
+[data-theme="light"] .hero-proof .proof-text { color: rgba(255,255,255,.5); }
+[data-theme="light"] .hero-proof .proof-text strong { color: rgba(255,255,255,.85); }
+[data-theme="light"] .stars-gold { color: #E8B84B; }
+/* Non-hero headings and text */
+[data-theme="light"] h2.section-h,
+[data-theme="light"] .feat-h, [data-theme="light"] .pq-h,
+[data-theme="light"] .news-title-t, [data-theme="light"] .news-list-hd,
+[data-theme="light"] .docs-hd, [data-theme="light"] .doc-type,
+[data-theme="light"] .chat-nm, [data-theme="light"] .testi-name,
+[data-theme="light"] .foot-logo, [data-theme="light"] .stat-n { color: #081C32; }
+[data-theme="light"] .testi-text { color: rgba(8,28,50,.82); }
+[data-theme="light"] .testi-quote { color: rgba(26,143,204,.35); }
+[data-theme="light"] .testi-card { background: #FFFFFF; border-color: rgba(26,143,204,.15); }
+[data-theme="light"] .testi-av { background: rgba(26,143,204,.1); border-color: rgba(26,143,204,.3); }
+[data-theme="light"] .feat-card { background: #FFFFFF; }
+[data-theme="light"] .feat-card:hover { background: #F0F9FF; }
+[data-theme="light"] .feat-grid { background: rgba(26,143,204,.15); }
+[data-theme="light"] .pq-card { background: #FFFFFF; }
+[data-theme="light"] .news-list, [data-theme="light"] .chat-ui,
+[data-theme="light"] .docs-ui { background: #FFFFFF; }
+[data-theme="light"] .chat-hd { background: #EBF5FF; }
+[data-theme="light"] .chat-hd-sm { background: #DFF0FF; }
+[data-theme="light"] .phone-screen.chat { background: #F4FAFF; }
+[data-theme="light"] .phone-screen.liturgy { background: linear-gradient(180deg,#DFF0FF 0%,#EBF5FF 100%); }
+[data-theme="light"] .lit-label { color: #081C32; }
+[data-theme="light"] .lit-row { background: rgba(255,255,255,.8); border-color: rgba(26,143,204,.12); }
+[data-theme="light"] .bub-d-r { background: #EBF5FF; color: rgba(8,28,50,.85); }
+[data-theme="light"] .bub-sm-r { background: rgba(26,143,204,.1); color: rgba(8,28,50,.85); }
+[data-theme="light"] .ps-tile { background: rgba(255,255,255,.8); border-color: rgba(26,143,204,.12); }
+[data-theme="light"] .ps-tile-label { color: rgba(8,28,50,.65); }
+[data-theme="light"] .ps-news-row { background: rgba(26,143,204,.06); }
+[data-theme="light"] .phone { background: #DFF0FF; border-color: rgba(26,143,204,.2); }
+[data-theme="light"] .phone-bar { background: #DFF0FF; }
+[data-theme="light"] .phone-screen { background: #DFF0FF; }
+[data-theme="light"] #stats { border-color: rgba(26,143,204,.15); }
+[data-theme="light"] #pour-qui { background: #E0EFFF; }
+[data-theme="light"] #cta { background: #DFF0FF; }
+[data-theme="light"] .cta-h, [data-theme="light"] .cta-h em + * { color: #081C32; }
+[data-theme="light"] footer { background: #0D1C2B; border-color: rgba(112,203,255,.1); color: rgba(255,255,255,.8); }
+[data-theme="light"] footer .foot-logo { color: var(--white); }
+[data-theme="light"] footer .foot-tagline { color: rgba(255,255,255,.4); }
+[data-theme="light"] footer .foot-col-h { color: rgba(255,255,255,.2); }
+[data-theme="light"] footer .foot-links a { color: rgba(255,255,255,.4); }
+[data-theme="light"] footer .foot-links a:hover { color: var(--blue); }
+[data-theme="light"] footer .foot-div { border-color: rgba(255,255,255,.08); }
+[data-theme="light"] footer .foot-copy { color: rgba(255,255,255,.2); }
+[data-theme="light"] #hero { background: linear-gradient(145deg,#0B2545 0%,#1A5480 55%,#3AADEC 100%); }
+
+/* Theme toggle button */
+.theme-btn {
+  display:flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:50%;
+  background:var(--blue-dim); border:1px solid rgba(112,203,255,.25);
+  color:var(--blue); cursor:pointer; transition:background .2s, transform .2s;
+  flex-shrink:0;
+}
+.theme-btn:hover { background:var(--blue-dim2); transform:scale(1.08); }
+.theme-btn i { width:16px; height:16px; pointer-events:none; }
+[data-theme="light"] .theme-btn { background:rgba(255,255,255,.2); border-color:rgba(255,255,255,.35); color:var(--white); }
+[data-theme="light"] nav.up .theme-btn { background:rgba(26,143,204,.1); border-color:rgba(26,143,204,.25); color:#1A8FCC; }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;background:#0D1520;color:white;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.5rem;-webkit-font-smoothing:antialiased;}
-.header{text-align:center;margin-bottom:3.5rem;}
-.tag{font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#70CBFF;margin-bottom:.875rem;}
-h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.25rem);font-weight:700;line-height:1.1;letter-spacing:-.025em;margin-bottom:.875rem;}
-.sub{font-size:1.0625rem;color:rgba(255,255,255,.5);line-height:1.65;}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;width:100%;}
-.card{border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.1);transition:transform .3s cubic-bezier(.34,1.56,.64,1),border-color .25s,box-shadow .25s;cursor:pointer;text-decoration:none;display:block;}
-.card:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.25);box-shadow:0 24px 60px rgba(0,0,0,.4);}
-.card-preview{height:220px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--w80);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
 
-/* V1 preview */
-.preview-v1{background:linear-gradient(145deg,#0B1929,#1A3A5C,#1F6FA6);}
-.preview-v1 .mock{width:80px;height:140px;background:#0A1520;border-radius:16px;border:3px solid rgba(255,255,255,.15);animation:float 6s ease-in-out infinite;box-shadow:0 16px 40px rgba(112,203,255,.25);}
-.preview-v1 .mock::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(112,203,255,.08),transparent);}
+.r{opacity:0;transform:translateY(22px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1);}
+.r.in{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}
+@media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none;}}
 
-/* V2 preview */
-.preview-v2{background:linear-gradient(145deg,#07101A,#0D1C2B);}
-.preview-v2 .mock-row{display:flex;gap:.75rem;align-items:flex-end;}
-.preview-v2 .mock-sm{width:60px;height:110px;background:#080E18;border-radius:12px;border:2px solid rgba(200,146,42,.2);animation:float-l 7s ease-in-out infinite;}
-.preview-v2 .mock-c{width:72px;height:140px;background:#080E18;border-radius:14px;border:2px solid rgba(200,146,42,.3);animation:float 6s ease-in-out infinite;box-shadow:0 0 30px rgba(200,146,42,.2);}
-.preview-v2 .mock-sr{width:60px;height:110px;background:#080E18;border-radius:12px;border:2px solid rgba(200,146,42,.2);animation:float-r 5.5s ease-in-out infinite;}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes float-l{0%,100%{transform:translateY(-5px)}50%{transform:translateY(5px)}}
-@keyframes float-r{0%,100%{transform:translateY(3px)}50%{transform:translateY(-8px)}}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1.25rem,5vw,2.5rem);}
 
-/* V3 preview */
-.preview-v3{background:var(--ink,#1A1108);background:linear-gradient(145deg,#1A1108,#2A1A08);}
-.preview-v3 .ring{position:absolute;border-radius:50%;border:1px solid rgba(200,82,26,.25);}
-.preview-v3 .r1{width:160px;height:160px;animation:ring-p 4s ease-in-out infinite;}
-.preview-v3 .r2{width:120px;height:120px;animation:ring-p 4s ease-in-out infinite .6s;}
-.preview-v3 .mock{width:76px;height:138px;background:#120D08;border-radius:16px;border:3px solid rgba(200,82,26,.3);z-index:1;animation:float 6s ease-in-out infinite;box-shadow:0 16px 40px rgba(200,82,26,.2);}
-@keyframes ring-p{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+/* ── NAVBAR ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 0;transition:background .35s,box-shadow .35s,padding .3s;}
+nav.up{background:rgba(7,16,26,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(112,203,255,.1);padding:.875rem 0;}
+.nav-row{display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+.logo{display:flex;align-items:center;gap:.5rem;font-family:'Playfair Display',serif;font-weight:600;font-size:1.3125rem;color:var(--white);letter-spacing:-.01em;}
+.logo-mark{width:30px;height:30px;flex-shrink:0;}
+.nav-menu{display:flex;align-items:center;gap:1.75rem;list-style:none;}
+.nav-menu a{font-size:.9375rem;font-weight:500;color:var(--w40);transition:color .2s;}
+.nav-menu a:hover{color:var(--white);}
+.nav-dl{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,var(--blue),var(--blue-mid));color:#031018;font-weight:700;font-size:.875rem;padding:.5625rem 1.25rem;border-radius:var(--r-pill);transition:transform .2s,box-shadow .2s;}
+.nav-dl:hover{transform:translateY(-1px);box-shadow:var(--glow-blue);}
+.nav-dl i{width:13px;height:13px;}
 
-.card-info{padding:1.5rem;}
-.card-version{font-size:.625rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.375rem;}
-.v1-c{color:#70CBFF;} .v2-c{color:#E8B84B;} .v3-c{color:#E87845;}
-.card-name{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;color:white;margin-bottom:.5rem;letter-spacing:-.01em;}
-.card-desc{font-size:.875rem;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:1.25rem;}
-.card-palette{display:flex;gap:.375rem;margin-bottom:1.25rem;}
-.swatch{width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,.08);}
-.card-cta{display:inline-flex;align-items:center;gap:.375rem;font-size:.875rem;font-weight:600;color:white;border:1.5px solid rgba(255,255,255,.2);border-radius:9999px;padding:.4375rem 1rem;transition:background .2s,border-color .2s;}
-.card:hover .card-cta{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4);}
+/* Hamburger */
+.ham{display:none;background:none;border:none;cursor:pointer;padding:.35rem;flex-direction:column;gap:5px;}
+.ham span{display:block;width:22px;height:1.5px;background:var(--w60);border-radius:2px;transition:.3s;}
+.ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
-.footer-note{margin-top:2.5rem;font-size:.8125rem;color:rgba(255,255,255,.3);text-align:center;line-height:1.65;}
+/* Drawer mobile */
+.nav-drawer{display:none;position:fixed;inset:0;z-index:99;padding-top:70px;}
+.nav-drawer.open{display:flex;flex-direction:column;}
+.drawer-bg{position:absolute;inset:0;background:rgba(7,16,26,.97);backdrop-filter:blur(20px);}
+.drawer-inner{position:relative;z-index:1;padding:2rem clamp(1.25rem,5vw,2.5rem);display:flex;flex-direction:column;gap:1.25rem;}
+.drawer-inner a{font-size:1.25rem;font-weight:500;color:var(--w60);padding:.5rem 0;border-bottom:1px solid var(--border);transition:color .2s;}
+.drawer-inner a:hover{color:var(--white);}
+.drawer-cta{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,var(--blue),var(--blue-mid));color:#031018;font-weight:700;font-size:1rem;padding:.875rem 2rem;border-radius:var(--r-pill);margin-top:.5rem;border:none;cursor:pointer;}
 
-@media(max-width:900px){.grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:560px){.grid{grid-template-columns:1fr;}}
+/* ── HERO ── */
+#hero{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding-top:5rem;position:relative;overflow:hidden;text-align:center;}
+.star-field{position:absolute;inset:0;pointer-events:none;}
+.star{position:absolute;border-radius:50%;background:white;animation:twinkle linear infinite;}
+@keyframes twinkle{0%,100%{opacity:.1}50%{opacity:.7}}
+.hero-glow{position:absolute;top:5%;left:50%;transform:translateX(-50%);width:700px;height:300px;background:radial-gradient(ellipse,rgba(112,203,255,.12) 0%,transparent 70%);pointer-events:none;filter:blur(40px);}
+.hero-inner{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:6rem 0 3rem;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(112,203,255,.3);border-radius:var(--r-pill);padding:.4rem 1rem;background:var(--blue-dim);margin-bottom:2rem;}
+.hero-eyebrow::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);display:inline-block;animation:twinkle 2s ease-in-out infinite;}
+h1.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.75rem,6vw,5rem);font-weight:700;line-height:1.05;letter-spacing:-.025em;color:var(--white);margin-bottom:1.5rem;}
+h1.hero-title em{font-style:italic;color:var(--blue);}
+.hero-sub{font-size:1.125rem;color:var(--w60);line-height:1.75;max-width:52ch;margin:0 auto 2.75rem;}
+.store-row{display:flex;justify-content:center;gap:.875rem;flex-wrap:wrap;margin-bottom:2.75rem;}
+.store-btn{display:inline-flex;align-items:center;gap:.75rem;padding:.8125rem 1.5rem;border-radius:var(--r-md);transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;min-width:168px;border:1px solid var(--w20);}
+.store-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 16px 40px rgba(255,255,255,.12);}
+.store-apple,.store-google{background:var(--white);}
+.store-icon{width:26px;height:26px;flex-shrink:0;}
+.store-text{display:flex;flex-direction:column;}
+.store-small{font-size:.625rem;color:#555;font-weight:500;line-height:1;margin-bottom:2px;}
+.store-name{font-size:.9375rem;color:#111;font-weight:700;line-height:1;}
+.hero-proof{display:flex;align-items:center;justify-content:center;gap:1rem;}
+.stars-gold{color:var(--gold-lt);font-size:.875rem;letter-spacing:.05em;}
+.proof-text{font-size:.8125rem;color:var(--w40);}
+.proof-text strong{color:var(--w80);}
+
+/* ── 3-PHONE SHOWCASE ── */
+.hero-phones{display:flex;justify-content:center;align-items:flex-end;gap:1.5rem;margin-top:4rem;position:relative;}
+.phone-halo-c{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:500px;height:120px;background:radial-gradient(ellipse,rgba(112,203,255,.22) 0%,transparent 70%);filter:blur(20px);pointer-events:none;}
+.phone{width:220px;border-radius:38px;overflow:hidden;background:#06101A;border:6px solid rgba(112,203,255,.14);box-shadow:0 24px 80px rgba(0,0,0,.6),var(--glow-blue),inset 0 0 0 1px rgba(255,255,255,.04);position:relative;z-index:1;}
+.phone.center{animation:floatC 6s ease-in-out infinite;}
+.phone.left{width:185px;border-radius:32px;opacity:.72;animation:floatL 7s ease-in-out infinite;}
+.phone.right{width:185px;border-radius:32px;opacity:.72;animation:floatR 5.5s ease-in-out infinite;}
+@keyframes floatC{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes floatL{0%,100%{transform:translateY(-8px)}50%{transform:translateY(4px)}}
+@keyframes floatR{0%,100%{transform:translateY(4px)}50%{transform:translateY(-12px)}}
+.phone-bar{width:64px;height:17px;background:#06101A;border-radius:0 0 10px 10px;margin:0 auto;position:relative;z-index:2;}
+.phone-screen{padding:.875rem;display:flex;flex-direction:column;gap:.5rem;min-height:380px;}
+.ps-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.125rem;}
+.ps-date{font-size:.45rem;color:rgba(255,255,255,.3);}
+.ps-brand{font-family:'Playfair Display',serif;font-size:.75rem;color:var(--blue);font-weight:600;}
+.ps-card{background:linear-gradient(135deg,rgba(112,203,255,.18),rgba(58,173,236,.06));border:1px solid rgba(112,203,255,.25);border-radius:13px;padding:.75rem;}
+.ps-card-tag{font-size:.44rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:.25rem;}
+.ps-card-title{font-family:'Playfair Display',serif;font-size:.72rem;font-weight:600;color:white;line-height:1.3;margin-bottom:.25rem;}
+.ps-card-verse{font-size:.5rem;color:rgba(255,255,255,.5);font-style:italic;line-height:1.5;}
+/* 6-tile 3×2 grid */
+.ps-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.28rem;}
+.ps-tile{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:.42rem .3rem;display:flex;flex-direction:column;align-items:center;gap:.2rem;text-align:center;}
+.ps-tile-icon{font-size:.875rem;}
+.ps-tile-label{font-size:.4rem;color:rgba(255,255,255,.6);font-weight:500;line-height:1.2;}
+.ps-news-hd{font-size:.42rem;color:rgba(255,255,255,.25);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:.1rem 0;}
+.ps-news-row{display:flex;gap:.35rem;align-items:flex-start;background:rgba(255,255,255,.04);border-radius:7px;padding:.4rem;}
+.ps-news-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);margin-top:2px;flex-shrink:0;}
+.ps-news-dot.gold{background:var(--gold-lt);}
+.ps-news-text{font-size:.44rem;color:rgba(255,255,255,.55);line-height:1.4;}
+
+/* Liturgy phone */
+.phone-screen.liturgy{background:linear-gradient(180deg,#06101A 0%,#0D1C2B 100%);padding:.75rem;}
+.lit-hd{font-size:.48rem;color:rgba(112,203,255,.8);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.625rem;}
+.lit-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:.5rem;margin-bottom:.3rem;}
+.lit-label{font-size:.52rem;font-weight:600;color:white;}
+.lit-time{font-size:.44rem;color:rgba(255,255,255,.35);}
+.lit-row.active{background:linear-gradient(90deg,rgba(112,203,255,.2),rgba(112,203,255,.05));border-color:rgba(112,203,255,.3);}
+.lit-row.active .lit-label{color:var(--blue);}
+
+/* Chat phone */
+.phone-screen.chat{background:#0F1C2A;padding:0;display:flex;flex-direction:column;}
+.chat-hd-sm{padding:.6rem .75rem;background:#06101A;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.chat-av-sm{width:26px;height:26px;border-radius:50%;background:var(--blue-dim);display:flex;align-items:center;justify-content:center;font-size:.75rem;}
+.chat-nm-sm{font-size:.58rem;font-weight:600;color:white;}
+.chat-st-sm{font-size:.44rem;color:rgba(255,255,255,.35);}
+.chat-msgs{padding:.625rem;display:flex;flex-direction:column;gap:.4rem;flex:1;}
+.bub-sm{max-width:82%;padding:.45rem .6rem;border-radius:13px;font-size:.5rem;line-height:1.55;}
+.bub-sm-r{background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);border-bottom-left-radius:3px;}
+.bub-sm-s{background:linear-gradient(135deg,var(--blue),var(--blue-mid));color:#031018;font-weight:500;align-self:flex-end;border-bottom-right-radius:3px;}
+
+/* ── STATS ── */
+#stats{padding:4rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+.stat{padding:1.5rem;text-align:center;}
+.stat-n{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.75rem);font-weight:700;color:var(--blue);line-height:1;margin-bottom:.375rem;}
+.stat-l{font-size:.6875rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--w40);}
+@media(max-width:600px){.stats-row{grid-template-columns:1fr 1fr;}}
+
+/* ── SECTION CHROME ── */
+.section-label{font-size:.6875rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem;}
+h2.section-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.875rem);font-weight:700;line-height:1.12;letter-spacing:-.02em;color:var(--white);margin-bottom:1rem;}
+.section-body{font-size:1.0625rem;color:var(--w60);line-height:1.72;max-width:50ch;}
+.section-center{text-align:center;}
+.section-center .section-body{margin:0 auto;}
+
+/* ── FEATURES (8 cartes, 4×2) ── */
+#features{padding:6rem 0;}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);margin-top:3.5rem;}
+.feat-card{background:var(--bg2);padding:2rem 1.75rem;transition:background .25s;}
+.feat-card:hover{background:var(--bg3);}
+.feat-icon-wrap{width:44px;height:44px;border-radius:11px;background:var(--blue-dim);border:1px solid rgba(112,203,255,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.125rem;color:var(--blue);}
+.feat-icon-wrap i{width:20px;height:20px;}
+.feat-h{font-weight:600;font-size:1rem;color:var(--white);margin-bottom:.4rem;}
+.feat-p{font-size:.875rem;color:var(--w60);line-height:1.6;}
+@media(max-width:1023px){.feat-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:540px){.feat-grid{grid-template-columns:1fr;}}
+
+/* ── ALTERNATING ── */
+#alternating{padding:6rem 0;}
+.alt-row{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.alt-row+.alt-row{margin-top:6rem;}
+.alt-row.rev{direction:rtl;}
+.alt-row.rev>*{direction:ltr;}
+.alt-mockup{border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);box-shadow:0 24px 64px rgba(0,0,0,.4);}
+.checklist{list-style:none;display:flex;flex-direction:column;gap:.625rem;margin-top:1.5rem;}
+.checklist li{display:flex;align-items:flex-start;gap:.75rem;font-size:.9375rem;color:var(--w60);line-height:1.55;}
+.check-icon{width:20px;height:20px;border-radius:50%;background:var(--blue-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;color:var(--blue);}
+.check-icon i{width:11px;height:11px;}
+
+/* News mockup */
+.news-list{padding:1.25rem;background:var(--bg2);}
+.news-list-hd{font-family:'Playfair Display',serif;font-size:.9375rem;font-weight:600;color:var(--white);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--border);}
+.news-item{display:flex;gap:.75rem;padding:.875rem 0;border-bottom:1px solid var(--border);}
+.news-item:last-child{border-bottom:none;}
+.news-scope{font-size:.5625rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:.25rem;}
+.news-title-t{font-size:.8125rem;font-weight:600;color:var(--white);line-height:1.4;margin-bottom:.25rem;}
+.news-meta-t{font-size:.625rem;color:var(--w40);}
+.news-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);margin-top:4px;flex-shrink:0;}
+
+/* Chat mockup */
+.chat-ui{display:flex;flex-direction:column;background:var(--bg2);min-height:280px;}
+.chat-hd{background:var(--bg);padding:.875rem 1.125rem;display:flex;align-items:center;gap:.75rem;border-bottom:1px solid var(--border);}
+.chat-av{width:34px;height:34px;border-radius:50%;background:var(--blue-dim);border:1px solid rgba(112,203,255,.3);display:flex;align-items:center;justify-content:center;font-size:1.125rem;}
+.chat-nm{font-size:.75rem;font-weight:600;color:var(--white);}
+.chat-st{font-size:.5625rem;color:var(--w40);}
+.chat-body-dark{padding:1rem;display:flex;flex-direction:column;gap:.5rem;flex:1;}
+.bub-d-r{background:rgba(255,255,255,.07);color:var(--w80);border-radius:14px;border-bottom-left-radius:4px;padding:.5625rem .75rem;font-size:.6875rem;line-height:1.55;max-width:82%;}
+.bub-d-s{background:linear-gradient(135deg,var(--blue),var(--blue-mid));color:#031018;border-radius:14px;border-bottom-right-radius:4px;padding:.5625rem .75rem;font-size:.6875rem;line-height:1.55;max-width:82%;align-self:flex-end;font-weight:500;}
+.bub-meta{font-size:.5rem;color:var(--w40);margin-top:.2rem;}
+.bub-meta-s{font-size:.5rem;color:rgba(112,203,255,.6);margin-top:.2rem;text-align:right;}
+
+/* Docs/Dons mockup */
+.docs-ui{background:var(--bg2);padding:1.25rem;}
+.docs-hd{font-family:'Playfair Display',serif;font-size:.9375rem;font-weight:600;color:var(--white);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--border);}
+.doc-item{display:flex;align-items:center;justify-content:space-between;padding:.75rem 0;border-bottom:1px solid var(--border);}
+.doc-item:last-child{border-bottom:none;}
+.doc-type{font-size:.75rem;font-weight:600;color:var(--white);}
+.doc-sub{font-size:.5625rem;color:var(--w40);margin-top:2px;}
+.doc-badge{font-size:.5rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.25rem .6rem;border-radius:var(--r-pill);}
+.doc-badge.ok{background:rgba(74,154,106,.18);color:#6DD9A0;border:1px solid rgba(74,154,106,.3);}
+.doc-badge.pending{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(112,203,255,.25);}
+.doc-badge.draft{background:rgba(200,146,42,.12);color:var(--gold-lt);border:1px solid rgba(200,146,42,.25);}
+
+@media(max-width:767px){
+  .alt-row{grid-template-columns:1fr;gap:2.5rem;}
+  .alt-row.rev{direction:ltr;}
+}
+
+/* ── POUR QUI ── */
+#pour-qui{padding:6rem 0;background:var(--bg2);}
+.pq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem;}
+.pq-card{border-radius:var(--r-lg);padding:2.5rem 2rem;border:1px solid var(--border);background:var(--bg);transition:border-color .25s,transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .25s;}
+.pq-card:hover{border-color:rgba(112,203,255,.4);transform:translateY(-6px);box-shadow:var(--glow-blue);}
+.pq-icon{width:52px;height:52px;border-radius:14px;background:var(--blue-dim);border:1px solid rgba(112,203,255,.2);display:flex;align-items:center;justify-content:center;color:var(--blue);margin-bottom:1.375rem;}
+.pq-icon i{width:24px;height:24px;}
+.pq-h{font-family:'Playfair Display',serif;font-size:1.1875rem;font-weight:600;color:var(--white);margin-bottom:.75rem;}
+.pq-p{font-size:.9375rem;color:var(--w60);line-height:1.65;margin-bottom:1.625rem;}
+.pq-link{display:inline-flex;align-items:center;gap:.375rem;font-size:.875rem;font-weight:600;color:var(--blue);border:1.5px solid rgba(112,203,255,.3);border-radius:var(--r-pill);padding:.4375rem 1rem;transition:background .2s,border-color .2s;}
+.pq-link:hover{background:var(--blue-dim);border-color:var(--blue);}
+.pq-link i{width:13px;height:13px;}
+@media(max-width:767px){.pq-grid{grid-template-columns:1fr;}}
+
+/* ── TESTIMONIALS ── */
+#testimonials{padding:6rem 0;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3.5rem;}
+.testi-card{background:var(--bg2);border-radius:var(--r-lg);padding:2rem;border:1px solid var(--border);transition:border-color .25s;}
+.testi-card:hover{border-color:rgba(112,203,255,.25);}
+.testi-quote{font-size:4rem;font-family:Georgia,serif;line-height:.7;color:rgba(112,203,255,.3);margin-bottom:.75rem;display:block;}
+.testi-text{font-family:'Playfair Display',serif;font-size:1.0625rem;font-style:italic;color:var(--w80);line-height:1.7;margin-bottom:1.5rem;}
+.testi-author{display:flex;align-items:center;gap:.875rem;}
+.testi-av{width:42px;height:42px;border-radius:50%;background:var(--blue-dim);border:2px solid rgba(112,203,255,.3);display:flex;align-items:center;justify-content:center;font-size:1.125rem;flex-shrink:0;}
+.testi-name{font-weight:600;font-size:.9375rem;color:var(--white);}
+.testi-role{font-size:.6875rem;color:var(--w40);margin-top:2px;}
+.testi-stars{color:var(--gold-lt);font-size:.8125rem;margin-top:3px;}
+@media(max-width:767px){.testi-grid{grid-template-columns:1fr;}}
+
+/* ── CTA ── */
+#cta{padding:7rem 0;background:var(--bg2);text-align:center;position:relative;overflow:hidden;}
+.cta-glow{position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(112,203,255,.1) 0%,transparent 65%);pointer-events:none;filter:blur(40px);}
+.cta-inner{position:relative;z-index:1;}
+.cta-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.375rem);font-weight:700;color:var(--white);letter-spacing:-.025em;line-height:1.1;margin-bottom:1rem;}
+.cta-h em{font-style:italic;color:var(--blue);}
+.cta-sub{font-size:1.0625rem;color:var(--w60);line-height:1.7;margin-bottom:2.75rem;}
+.cta-store-row{display:flex;justify-content:center;gap:.875rem;flex-wrap:wrap;margin-bottom:2rem;}
+.cta-badges{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;}
+.cta-badge{font-size:.75rem;color:rgba(112,203,255,.7);font-weight:500;display:flex;align-items:center;gap:.375rem;}
+.cta-badge i{width:13px;height:13px;}
+
+/* ── FOOTER ── */
+footer{background:var(--bg);padding:4rem 0 2rem;border-top:1px solid var(--border);}
+.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.foot-logo{display:flex;align-items:center;gap:.5rem;font-family:'Playfair Display',serif;font-weight:600;font-size:1.25rem;color:var(--white);margin-bottom:.75rem;}
+.foot-tagline{font-size:.875rem;color:var(--w40);line-height:1.6;max-width:26ch;}
+.foot-col-h{font-size:.625rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--w20);margin-bottom:1.125rem;}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+.foot-links a{font-size:.875rem;color:var(--w40);transition:color .2s;}
+.foot-links a:hover{color:var(--blue);}
+.foot-div{border:none;border-top:1px solid var(--border);margin-bottom:1.5rem;}
+.foot-copy{font-size:.75rem;color:var(--w20);}
+@media(max-width:767px){.foot-top{grid-template-columns:1fr 1fr;}.foot-brand{grid-column:1/-1;}}
+
+/* ── RESPONSIVE GLOBAL ── */
+@media(max-width:991px){
+  .phone.left,.phone.right{display:none;}
+  .hero-phones{gap:0;}
+}
+@media(max-width:767px){
+  .hero-inner{padding:5rem 0 2rem;}
+  h1.hero-title{font-size:clamp(2.25rem,8vw,3.25rem);}
+  .hero-sub{font-size:1rem;}
+  .hero-phones{margin-top:2.5rem;}
+}
+@media(max-width:600px){
+  .nav-menu,.nav-dl{display:none;}
+  .ham{display:flex;}
+}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="tag">Jàngu Bi · Landing Page</div>
-  <h1>Choisissez votre direction</h1>
-  <p class="sub">3 versions distinctes — palettes, typographie et ambiance différentes.</p>
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="wrap">
+    <div class="nav-row">
+      <a href="#" class="logo">
+        <svg class="logo-mark" viewBox="0 0 30 30" fill="none">
+          <rect x="12.5" y="2" width="5" height="26" rx="2.5" fill="#70CBFF"/>
+          <rect x="3" y="9.5" width="24" height="5" rx="2.5" fill="#70CBFF"/>
+          <circle cx="15" cy="12" r="3" fill="#06101A"/>
+        </svg>
+        Jàngu Bi
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#features">Fonctionnalités</a></li>
+        <li><a href="#pour-qui">Paroisses</a></li>
+        <li><a href="#testimonials">Témoignages</a></li>
+      </ul>
+      <a href="#cta" class="nav-dl"><i data-lucide="download"></i> Télécharger</a>
+      <button class="theme-btn" id="theme-btn" aria-label="Changer le thème"><i data-lucide="moon"></i></button>
+      <button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- DRAWER MOBILE -->
+<div class="nav-drawer" id="drawer">
+  <div class="drawer-bg" id="drawer-bg"></div>
+  <div class="drawer-inner">
+    <a href="#features" class="dl">Fonctionnalités</a>
+    <a href="#pour-qui" class="dl">Paroisses</a>
+    <a href="#testimonials" class="dl">Témoignages</a>
+    <a href="#cta" class="drawer-cta dl"><i data-lucide="download"></i> Télécharger l'app</a>
+  </div>
 </div>
 
-<div class="grid">
-  <!-- V1 -->
-  <a href="v1-lumiere.html" class="card">
-    <div class="card-preview preview-v1">
-      <div class="mock"></div>
-    </div>
-    <div class="card-info">
-      <div class="card-version v1-c">Version 01</div>
-      <div class="card-name">Lumière</div>
-      <div class="card-desc">Blanc &amp; Bleu ciel. Éditorial, épuré, généreux en espace. Proche des standards SaaS premium.</div>
-      <div class="card-palette">
-        <div class="swatch" style="background:#0F1923"></div>
-        <div class="swatch" style="background:#1A8FCC"></div>
-        <div class="swatch" style="background:#70CBFF"></div>
-        <div class="swatch" style="background:#EBF7FF"></div>
-        <div class="swatch" style="background:#FFFFFF"></div>
+<!-- HERO -->
+<section id="hero">
+  <div class="star-field" id="stars"></div>
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-eyebrow r">Nouveau · Disponible maintenant au Sénégal</div>
+      <h1 class="hero-title r d1">L'Église du Sénégal<br>dans votre <em>poche.</em></h1>
+      <p class="hero-sub r d2">Bible, Liturgie, Actualités, Discussion avec les prêtres, Dons &amp; Quête en ligne — tout en une seule application.</p>
+      <div class="store-row r d3">
+        <a href="#" class="store-btn store-apple">
+          <svg class="store-icon" viewBox="0 0 26 26" fill="none"><path d="M21.5 19.2c-.5 1.1-1 2.1-1.8 3-.9 1.1-1.9 1.7-3 1.7-1 0-2-.5-3.1-.5-1.1 0-2.2.5-3.2.5-1.1 0-2-.6-2.9-1.7-2.2-2.7-3.5-6.8-3.5-10.7C4 6.5 6.8 4 9.5 4c1.1 0 2.2.5 3 .5.7 0 1.9-.6 3.2-.6 1.4 0 3.6.7 4.9 2.8-3.5 2.1-2.9 6.8.4 8.6-.5 1.3-1 2.8-1.5 3.9zM16.5 2c.1 1.3-.4 2.6-1.1 3.5-.8 1-2 1.8-3.1 1.7-.1-1.2.4-2.5 1.1-3.4.8-1 2.1-1.7 3.1-1.8z" fill="#1D1D1F"/></svg>
+          <div class="store-text"><span class="store-small">Download on the</span><span class="store-name">App Store</span></div>
+        </a>
+        <a href="#" class="store-btn store-google">
+          <svg class="store-icon" viewBox="0 0 26 26" fill="none"><path d="M3 4.5L14.2 13 3 21.5V4.5z" fill="#4285F4"/><path d="M3 4.5l13.5 8.5L23 8.5 7 2 3 4.5z" fill="#34A853"/><path d="M3 21.5l13.5-8.5L23 17.5 7 24l-4-2.5z" fill="#FBBC04"/><path d="M16.5 13L23 8.5v9L16.5 13z" fill="#EA4335"/></svg>
+          <div class="store-text"><span class="store-small">Get it on</span><span class="store-name">Google Play</span></div>
+        </a>
       </div>
-      <span class="card-cta">Voir la version →</span>
-    </div>
-  </a>
-
-  <!-- V2 -->
-  <a href="v2-nuit-sacree.html" class="card">
-    <div class="card-preview preview-v2">
-      <div class="mock-row">
-        <div class="mock-sm"></div>
-        <div class="mock-c"></div>
-        <div class="mock-sr"></div>
+      <div class="hero-proof r d4">
+        <span class="stars-gold">★★★★★</span>
+        <span class="proof-text"><strong>4.8</strong> · <strong>2 400+</strong> fidèles · <strong>50+</strong> paroisses</span>
       </div>
     </div>
-    <div class="card-info">
-      <div class="card-version v2-c">Version 02</div>
-      <div class="card-name">Nuit Sacrée</div>
-      <div class="card-desc">Dark mode avec or liturgique. Premium, spirituel, intense. 3 phones flottants en hero.</div>
-      <div class="card-palette">
-        <div class="swatch" style="background:#07101A"></div>
-        <div class="swatch" style="background:#0D1C2B"></div>
-        <div class="swatch" style="background:#C8922A"></div>
-        <div class="swatch" style="background:#E8B84B"></div>
-        <div class="swatch" style="background:#70CBFF"></div>
+
+    <!-- 3 téléphones -->
+    <div class="hero-phones r d3">
+      <!-- Gauche : Liturgie -->
+      <div class="phone left">
+        <div class="phone-bar"></div>
+        <div class="phone-screen liturgy">
+          <div class="lit-hd">Offices du jour</div>
+          <div class="lit-row active"><div><div class="lit-label">Laudes</div><div class="lit-time">6h30</div></div><span style="font-size:.875rem">☀️</span></div>
+          <div class="lit-row"><div><div class="lit-label">Messe du jour</div><div class="lit-time">9h00</div></div><span style="font-size:.875rem">✝️</span></div>
+          <div class="lit-row"><div><div class="lit-label">None</div><div class="lit-time">15h00</div></div><span style="font-size:.875rem">🕐</span></div>
+          <div class="lit-row"><div><div class="lit-label">Vêpres</div><div class="lit-time">18h30</div></div><span style="font-size:.875rem">🌙</span></div>
+          <div class="lit-row"><div><div class="lit-label">Complies</div><div class="lit-time">21h00</div></div><span style="font-size:.875rem">⭐</span></div>
+        </div>
       </div>
-      <span class="card-cta">Voir la version →</span>
-    </div>
-  </a>
 
-  <!-- V3 -->
-  <a href="v3-soleil-levant.html" class="card">
-    <div class="card-preview preview-v3">
-      <div class="ring r1"></div>
-      <div class="ring r2"></div>
-      <div class="mock"></div>
-    </div>
-    <div class="card-info">
-      <div class="card-version v3-c">Version 03</div>
-      <div class="card-name">Soleil Levant</div>
-      <div class="card-desc">Crème &amp; Terracotta. Chaud, ancré, typographique. Bande stats pleine largeur terracotta.</div>
-      <div class="card-palette">
-        <div class="swatch" style="background:#1A1108"></div>
-        <div class="swatch" style="background:#C8521A"></div>
-        <div class="swatch" style="background:#E87845"></div>
-        <div class="swatch" style="background:#F5EFE6"></div>
-        <div class="swatch" style="background:#FBF7F2"></div>
+      <!-- Centre : Accueil 6 tuiles -->
+      <div class="phone center">
+        <div class="phone-bar"></div>
+        <div class="phone-screen">
+          <div class="ps-top">
+            <div><div class="ps-date">Mercredi 29 avril</div><div class="ps-brand">Jàngu Bi</div></div>
+            <span>🔔</span>
+          </div>
+          <div class="ps-card">
+            <div class="ps-card-tag">Liturgie du jour</div>
+            <div class="ps-card-title">3e semaine de Pâques</div>
+            <div class="ps-card-verse">« Je suis le pain de vie. Qui vient à moi n'aura plus jamais faim. »</div>
+          </div>
+          <div class="ps-grid">
+            <div class="ps-tile"><span class="ps-tile-icon">📖</span><span class="ps-tile-label">Bible</span></div>
+            <div class="ps-tile"><span class="ps-tile-icon">📰</span><span class="ps-tile-label">Actus</span></div>
+            <div class="ps-tile"><span class="ps-tile-icon">💬</span><span class="ps-tile-label">Prêtre</span></div>
+            <div class="ps-tile"><span class="ps-tile-icon">📄</span><span class="ps-tile-label">Dem. messe</span></div>
+            <div class="ps-tile"><span class="ps-tile-icon">💝</span><span class="ps-tile-label">Dons</span></div>
+            <div class="ps-tile"><span class="ps-tile-icon">🪣</span><span class="ps-tile-label">Quête</span></div>
+          </div>
+          <div class="ps-news-hd">Actualités</div>
+          <div class="ps-news-row"><div class="ps-news-dot"></div><div class="ps-news-text">Retraite spirituelle — Saint-Joseph, 3 mai 9h</div></div>
+          <div class="ps-news-row"><div class="ps-news-dot gold"></div><div class="ps-news-text">Message du diocèse de Dakar</div></div>
+        </div>
       </div>
-      <span class="card-cta">Voir la version →</span>
+
+      <!-- Droite : Chat -->
+      <div class="phone right">
+        <div class="phone-bar"></div>
+        <div class="phone-screen chat">
+          <div class="chat-hd-sm">
+            <div class="chat-av-sm">✝️</div>
+            <div><div class="chat-nm-sm">Père Emmanuel Diallo</div><div class="chat-st-sm">En ligne</div></div>
+          </div>
+          <div class="chat-msgs">
+            <div><div class="bub-sm bub-sm-r">Bonjour, comment puis-je vous aider ?</div></div>
+            <div style="align-self:flex-end"><div class="bub-sm bub-sm-s">RDV pour 1ère communion svp.</div></div>
+            <div><div class="bub-sm bub-sm-r">Samedi à 10h ou 15h ?</div></div>
+            <div style="align-self:flex-end"><div class="bub-sm bub-sm-s">15h parfait, merci ! 🙏</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-halo-c"></div>
     </div>
-  </a>
-</div>
+  </div>
+</section>
 
-<p class="footer-note">Icônes Lucide · Fonts Playfair Display + Inter · Boutons App Store &amp; Google Play dans chaque version</p>
+<!-- STATS -->
+<section id="stats">
+  <div class="wrap">
+    <div class="stats-row">
+      <div class="stat r"><div class="stat-n" data-target="2400">0</div><div class="stat-l">Fidèles actifs</div></div>
+      <div class="stat r d1"><div class="stat-n" data-target="50">0</div><div class="stat-l">Paroisses</div></div>
+      <div class="stat r d2"><div class="stat-n" data-target="7">0</div><div class="stat-l">Diocèses</div></div>
+      <div class="stat r d3"><div class="stat-n" data-target="99" data-suffix=".9%">0</div><div class="stat-l">Uptime</div></div>
+    </div>
+  </div>
+</section>
 
+<!-- FEATURES (8 cartes) -->
+<section id="features">
+  <div class="wrap">
+    <div class="r section-center">
+      <div class="section-label">Tout-en-un</div>
+      <h2 class="section-h">Toutes les fonctionnalités<br>de votre vie catholique</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card r"><div class="feat-icon-wrap"><i data-lucide="book-open"></i></div><div class="feat-h">Bible</div><div class="feat-p">73 livres, texte du jour, recherche par verset et plans de lecture personnalisés.</div></div>
+      <div class="feat-card r d1"><div class="feat-icon-wrap"><i data-lucide="sun"></i></div><div class="feat-h">Liturgie du jour</div><div class="feat-p">Laudes, Messe, Vêpres, Complies — tous les offices mis à jour chaque matin.</div></div>
+      <div class="feat-card r d2"><div class="feat-icon-wrap"><i data-lucide="circle-dot"></i></div><div class="feat-h">Rosaire guidé</div><div class="feat-p">Mystères et prières guidées, à votre rythme, partout où vous vous trouvez.</div></div>
+      <div class="feat-card r d3"><div class="feat-icon-wrap"><i data-lucide="tv-2"></i></div><div class="feat-h">TV Catholique</div><div class="feat-p">Messes en direct et replays des grandes célébrations de l'Église du Sénégal.</div></div>
+      <div class="feat-card r"><div class="feat-icon-wrap"><i data-lucide="newspaper"></i></div><div class="feat-h">Actualités</div><div class="feat-p">Informations paroissiales, diocésaines et mondiales en temps réel, triées pour vous.</div></div>
+      <div class="feat-card r d1"><div class="feat-icon-wrap"><i data-lucide="message-circle"></i></div><div class="feat-h">Discussion prêtres</div><div class="feat-p">Messagerie chiffrée et confidentielle avec les prêtres de votre communauté.</div></div>
+      <div class="feat-card r d2"><div class="feat-icon-wrap"><i data-lucide="file-text"></i></div><div class="feat-h">Demande de messe</div><div class="feat-p">Sollicitez des messes, baptêmes et autres sacrements directement depuis l'app.</div></div>
+      <div class="feat-card r d3"><div class="feat-icon-wrap"><i data-lucide="heart-handshake"></i></div><div class="feat-h">Dons &amp; Quête</div><div class="feat-p">Contribuez à la quête dominicale et aux projets paroissiaux en ligne, en sécurité.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ALTERNATING -->
+<section id="alternating">
+  <div class="wrap">
+
+    <!-- Actualités -->
+    <div class="alt-row r">
+      <div class="alt-mockup">
+        <div class="news-list">
+          <div class="news-list-hd">Actualités paroissiales</div>
+          <div class="news-item"><div class="news-dot"></div><div><div class="news-scope">Global</div><div class="news-title-t">Message du Pape François pour le Jubilé 2025</div><div class="news-meta-t">Il y a 2 heures</div></div></div>
+          <div class="news-item"><div class="news-dot" style="background:#C8922A"></div><div><div class="news-scope" style="color:#C8922A">Diocèse de Dakar</div><div class="news-title-t">Rencontre des jeunes catholiques — Édition 2026</div><div class="news-meta-t">Hier</div></div></div>
+          <div class="news-item"><div class="news-dot" style="background:#4A9A6A"></div><div><div class="news-scope" style="color:#4A9A6A">Paroisse Saint-Joseph</div><div class="news-title-t">Retraite de carême — inscription ouverte</div><div class="news-meta-t">3 mai · 9h00</div></div></div>
+          <div class="news-item"><div class="news-dot"></div><div><div class="news-scope">Global</div><div class="news-title-t">Dimanche de la Divine Miséricorde — homélie</div><div class="news-meta-t">Il y a 3 jours</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">Actualités paroissiales</div>
+        <h2 class="section-h">Votre paroisse,<br>en temps réel.</h2>
+        <p class="section-body">Global, diocésain, paroissial — tout en un fil clair, organisé, accessible.</p>
+        <ul class="checklist">
+          <li><span class="check-icon"><i data-lucide="check"></i></span>Catégories par thème</li>
+          <li><span class="check-icon"><i data-lucide="check"></i></span>Portées global / diocèse / paroisse</li>
+          <li><span class="check-icon"><i data-lucide="check"></i></span>Partage en un tap</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Chat prêtres -->
+    <div class="alt-row rev r">
+      <div>
+        <div class="section-label">Discussion confidentielle</div>
+        <h2 class="section-h">Parlez à votre<br>prêtre en privé.</h2>
+        <p class="section-body">Échanges sécurisés et chiffrés avec les prêtres de votre communauté.</p>
+        <ul class="checklist">
+          <li><span class="check-icon"><i data-lucide="check"></i></span>Messages chiffrés de bout en bout</li>
+          <li><span class="check-icon"><i data-lucide="check"></i></span>Purge automatique (180 jours)</li>
+          <li><span class="check-icon"><i data-lucide="check"></i></span>Réactions &amp; export</li>
+        </ul>
+      </div>
+      <div class="alt-mockup">
+        <div class="chat-ui">
+          <div class="chat-hd"><div class="chat-av">✝️</div><div><div class="chat-nm">Père Emmanuel Diallo</div><div class="chat-st">En ligne · Paroisse Saint-Joseph</div></div></div>
+          <div class="chat-body-dark" style="min-height:220px;">
+            <div><div class="bub-d-r">Bonjour Marie-Claire, comment puis-je vous aider ?</div><div class="bub-meta">9:42</div></div>
+            <div style="align-self:flex-end"><div class="bub-d-s">Père, j'aurais besoin d'un RDV pour la 1ère communion.</div><div class="bub-meta-s">9:45 ✓✓</div></div>
+            <div><div class="bub-d-r">Bien sûr ! Samedi 10h ou 15h ?</div><div class="bub-meta">9:47</div></div>
+            <div style="align-self:flex-end"><div class="bub-d-s">15h parfait, merci Père 🙏</div><div class="bub-meta-s">9:48 ✓✓</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dons, Quête & Documents -->
+    <div class="alt-row r">
+      <div class="alt-mockup">
+        <div class="docs-ui">
+          <div class="docs-hd">Mes contributions &amp; demandes</div>
+          <div class="doc-item">
+            <div><div class="doc-type">💝 Don — Rénovation chapelle</div><div class="doc-sub">Paroisse Saint-Joseph · 25 000 FCFA</div></div>
+            <span class="doc-badge ok">Reçu</span>
+          </div>
+          <div class="doc-item">
+            <div><div class="doc-type">🪣 Quête dominicale</div><div class="doc-sub">Dimanche 28 avril · 5 000 FCFA</div></div>
+            <span class="doc-badge ok">Envoyée</span>
+          </div>
+          <div class="doc-item">
+            <div><div class="doc-type">📄 Demande de baptême</div><div class="doc-sub">Demandé le 20 avril</div></div>
+            <span class="doc-badge pending">En cours</span>
+          </div>
+          <div class="doc-item">
+            <div><div class="doc-type">📋 Certificat de mariage</div><div class="doc-sub">Demandé le 15 avril</div></div>
+            <span class="doc-badge draft">À compléter</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">Dons, Quête &amp; Documents</div>
+        <h2 class="section-h">Contribuez et gérez<br>vos sacrements.</h2>
+        <p class="section-body">Quête en ligne, dons paroissiaux et demandes de documents ecclésiastiques — tout depuis l'app.</p>
+        <ul class="checklist">
+          <li><span class="check-icon"><i data-lucide="check"></i></span>Paiement mobile (Orange Money, Wave…)</li>
+          <li><span class="check-icon"><i data-lucide="check"></i></span>Suivi en temps réel de vos demandes</li>
+          <li><span class="check-icon"><i data-lucide="check"></i></span>Notifications à chaque étape</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- POUR QUI -->
+<section id="pour-qui">
+  <div class="wrap">
+    <div class="r section-center">
+      <div class="section-label">Pour qui ?</div>
+      <h2 class="section-h">Une plateforme pour toute l'Église</h2>
+    </div>
+    <div class="pq-grid">
+      <div class="pq-card r"><div class="pq-icon"><i data-lucide="user-round"></i></div><div class="pq-h">Fidèles</div><div class="pq-p">Priez, lisez, faites vos dons, discutez avec les prêtres et restez connecté à votre communauté.</div><a href="#cta" class="pq-link">Je m'inscris <i data-lucide="arrow-right"></i></a></div>
+      <div class="pq-card r d1"><div class="pq-icon"><i data-lucide="building-2"></i></div><div class="pq-h">Paroisses</div><div class="pq-p">Publiez vos actualités, gérez les demandes de documents et recevez les dons de vos fidèles.</div><a href="#cta" class="pq-link">Ma paroisse <i data-lucide="arrow-right"></i></a></div>
+      <div class="pq-card r d2"><div class="pq-icon"><i data-lucide="landmark"></i></div><div class="pq-h">Diocèses</div><div class="pq-p">Fédérez vos paroisses, pilotez les contributions et coordonnez la pastorale diocésaine.</div><a href="#cta" class="pq-link">Mon diocèse <i data-lucide="arrow-right"></i></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="r section-center">
+      <div class="section-label">Témoignages</div>
+      <h2 class="section-h">Ce que disent les fidèles</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card r"><span class="testi-quote">"</span><p class="testi-text">Jàngu Bi a changé ma façon de vivre ma foi. La liturgie du jour est ma première lecture chaque matin, et je contribue à la quête même en voyage.</p><div class="testi-author"><div class="testi-av">👩🏾</div><div><div class="testi-name">Marie-Claire Diop</div><div class="testi-role">Fidèle · Paroisse Saint-Joseph, Dakar</div><div class="testi-stars">★★★★★</div></div></div></div>
+      <div class="testi-card r d1"><span class="testi-quote">"</span><p class="testi-text">L'app nous a permis de toucher trois fois plus de fidèles. La gestion des documents et des dons est un gain de temps remarquable pour notre équipe pastorale.</p><div class="testi-author"><div class="testi-av">👨🏾</div><div><div class="testi-name">Père Augustin Ndiaye</div><div class="testi-role">Curé · Paroisse Notre-Dame, Saint-Louis</div><div class="testi-stars">★★★★★</div></div></div></div>
+      <div class="testi-card r d2"><span class="testi-quote">"</span><p class="testi-text">Notre diocèse a adopté Jàngu Bi il y a six mois. L'impact sur la communion entre nos paroisses est remarquable — et les contributions en ligne ont augmenté de 40 %.</p><div class="testi-author"><div class="testi-av">⛪</div><div><div class="testi-name">Mgr Jean-Baptiste Mendy</div><div class="testi-role">Évêque · Diocèse de Thiès</div><div class="testi-stars">★★★★★</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta">
+  <div class="cta-glow"></div>
+  <div class="wrap">
+    <div class="cta-inner">
+      <h2 class="cta-h r">Rejoignez la communauté<br><em>Jàngu Bi.</em></h2>
+      <p class="cta-sub r d1">Disponible pour les fidèles, les paroisses et les diocèses du Sénégal. Gratuit, sans publicité.</p>
+      <div class="cta-store-row r d2">
+        <a href="#" class="store-btn store-apple">
+          <svg class="store-icon" viewBox="0 0 26 26" fill="none"><path d="M21.5 19.2c-.5 1.1-1 2.1-1.8 3-.9 1.1-1.9 1.7-3 1.7-1 0-2-.5-3.1-.5-1.1 0-2.2.5-3.2.5-1.1 0-2-.6-2.9-1.7-2.2-2.7-3.5-6.8-3.5-10.7C4 6.5 6.8 4 9.5 4c1.1 0 2.2.5 3 .5.7 0 1.9-.6 3.2-.6 1.4 0 3.6.7 4.9 2.8-3.5 2.1-2.9 6.8.4 8.6-.5 1.3-1 2.8-1.5 3.9zM16.5 2c.1 1.3-.4 2.6-1.1 3.5-.8 1-2 1.8-3.1 1.7-.1-1.2.4-2.5 1.1-3.4.8-1 2.1-1.7 3.1-1.8z" fill="#1D1D1F"/></svg>
+          <div class="store-text"><span class="store-small">Download on the</span><span class="store-name">App Store</span></div>
+        </a>
+        <a href="#" class="store-btn store-google">
+          <svg class="store-icon" viewBox="0 0 26 26" fill="none"><path d="M3 4.5L14.2 13 3 21.5V4.5z" fill="#4285F4"/><path d="M3 4.5l13.5 8.5L23 8.5 7 2 3 4.5z" fill="#34A853"/><path d="M3 21.5l13.5-8.5L23 17.5 7 24l-4-2.5z" fill="#FBBC04"/><path d="M16.5 13L23 8.5v9L16.5 13z" fill="#EA4335"/></svg>
+          <div class="store-text"><span class="store-small">Get it on</span><span class="store-name">Google Play</span></div>
+        </a>
+      </div>
+      <div class="cta-badges r d3">
+        <span class="cta-badge"><i data-lucide="shield-check"></i> Gratuit</span>
+        <span class="cta-badge"><i data-lucide="ban"></i> Sans publicité</span>
+        <span class="cta-badge"><i data-lucide="lock"></i> Chiffré</span>
+        <span class="cta-badge"><i data-lucide="heart"></i> Catholique</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-logo">
+          <svg width="26" height="26" viewBox="0 0 30 30" fill="none"><rect x="12.5" y="2" width="5" height="26" rx="2.5" fill="#70CBFF"/><rect x="3" y="9.5" width="24" height="5" rx="2.5" fill="#70CBFF"/><circle cx="15" cy="12" r="3" fill="#06101A"/></svg>
+          Jàngu Bi
+        </div>
+        <p class="foot-tagline">L'Église du Sénégal dans votre poche.</p>
+      </div>
+      <div><div class="foot-col-h">Fonctionnalités</div><ul class="foot-links"><li><a href="#">Bible</a></li><li><a href="#">Rosaire</a></li><li><a href="#">Liturgie</a></li><li><a href="#">Actualités</a></li><li><a href="#">Messagerie</a></li><li><a href="#">Dons &amp; Quête</a></li></ul></div>
+      <div><div class="foot-col-h">Paroisses</div><ul class="foot-links"><li><a href="#">Annuaire</a></li><li><a href="#">Rejoindre</a></li><li><a href="#">Contact</a></li></ul></div>
+      <div><div class="foot-col-h">Légal</div><ul class="foot-links"><li><a href="#">CGU</a></li><li><a href="#">Confidentialité</a></li><li><a href="#">Mentions légales</a></li></ul></div>
+    </div>
+    <hr class="foot-div">
+    <div class="foot-copy">© 2026 Jàngu Bi · Fait avec ❤️ pour l'Église catholique du Sénégal</div>
+  </div>
+</footer>
+
+<script>
+// ── CRITICAL: Reveal animations must run first, independently ──
+(function() {
+  const revealEls = document.querySelectorAll('.r');
+
+  function revealVisible() {
+    revealEls.forEach(el => {
+      if (el.classList.contains('in')) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
+        el.classList.add('in');
+      }
+    });
+  }
+
+  const obs = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+  }), { threshold: 0, rootMargin: '50px 0px -20px 0px' });
+  revealEls.forEach(el => obs.observe(el));
+
+  // Multiple fallbacks to ensure above-the-fold content always appears
+  revealVisible();
+  setTimeout(revealVisible, 50);
+  setTimeout(revealVisible, 200);
+  window.addEventListener('load', revealVisible);
+  window.addEventListener('scroll', revealVisible, { passive: true });
+})();
+
+// ── Navbar scroll ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('up', scrollY > 50), { passive: true });
+
+// ── Hamburger / drawer ──
+const ham = document.getElementById('ham');
+const drawer = document.getElementById('drawer');
+const drawerBg = document.getElementById('drawer-bg');
+function toggleDrawer(open) {
+  ham.classList.toggle('open', open);
+  drawer.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+ham.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
+drawerBg.addEventListener('click', () => toggleDrawer(false));
+drawer.querySelectorAll('.dl').forEach(a => a.addEventListener('click', () => toggleDrawer(false)));
+
+// ── Étoiles ──
+const sf = document.getElementById('stars');
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement('div'); s.className = 'star';
+  const sz = Math.random() * 2 + .5;
+  s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;`;
+  sf.appendChild(s);
+}
+
+// ── Theme toggle ──
+const root = document.documentElement;
+const themeBtn = document.getElementById('theme-btn');
+const savedTheme = localStorage.getItem('jb-theme') || 'dark';
+root.setAttribute('data-theme', savedTheme);
+
+function syncThemeIcon() {
+  try {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    const iconName = isDark ? 'moon' : 'sun';
+    // Lucide replaces <i> with <svg>, so we need to handle both cases
+    const existing = themeBtn.querySelector('[data-lucide]');
+    if (existing) {
+      existing.setAttribute('data-lucide', iconName);
+    } else {
+      // Re-create the icon element if it was replaced
+      themeBtn.innerHTML = `<i data-lucide="${iconName}"></i>`;
+    }
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  } catch(e) { console.warn('Theme icon sync error:', e); }
+}
+themeBtn.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('jb-theme', next);
+  syncThemeIcon();
+});
+
+// ── Lucide icons (wrapped to prevent crash) ──
+try {
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+    syncThemeIcon();
+  } else {
+    // Lucide CDN not loaded yet — retry on load
+    window.addEventListener('load', () => {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+        syncThemeIcon();
+      }
+    });
+  }
+} catch(e) { console.warn('Lucide init error:', e); }
+
+// ── Count-up ──
+const cObs = new IntersectionObserver(entries => entries.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target, target = parseFloat(el.dataset.target), suffix = el.dataset.suffix || '', dur = 1500, start = Date.now();
+  const step = () => {
+    const p = Math.min((Date.now() - start) / dur, 1), ease = 1 - Math.pow(1 - p, 3), val = Math.floor(ease * target);
+    el.textContent = val >= 1000 ? (val / 1000).toFixed(1) + 'k+' : val;
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = target >= 1000 ? (target / 1000).toFixed(1) + 'k+' : target + suffix;
+  };
+  requestAnimationFrame(step); cObs.unobserve(el);
+}), { threshold: .5 });
+document.querySelectorAll('.stat-n[data-target]').forEach(el => cObs.observe(el));
+</script>
 </body>
 </html>
